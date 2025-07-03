@@ -32,40 +32,75 @@ El enfoque principal es garantizar la independencia de cada caso de prueba, apli
 ## Estructura del Proyecto
 
 mobile-automation-java/
+
 ├── .idea/
+
 │   ├── .gitignore
+
 │   ├── compiler.xml
+
 │   ├── encodings.xml
+
 │   ├── jarRepositories.xml
+
 │   ├── misc.xml
+
 │   ├── workspace.xml├── pom.xml
+
 ├── src/
+
 │   ├── main/
+
 │   │   └── java/
+
 │   │       └── mobile/
+
 │   │           └── utils/
+
 │   │               ├── CapabilitiesFactory.java
+
 │   │               └── DriverManager.java
+
+
 │
 │   ├── test/
+
 │   │   └── java/
+
 │   │       └── mobile/
+
 │   │           ├── pages/
+
 │   │           │   ├── BasePage.java
+
 │   │           │   ├── LoginPage.java
+
 │   │           │   ├── MenuPage.java
+
 │   │           │   ├── RegisterPage.java
+
 │   │           │   └── SwipePage.java
+
 │   │           └── test/
+
 │   │               ├── BaseTest.java
+
 │   │               ├── LoginTest.java
+
 │   │               ├── NavigationMenuTest.java
+
 │   │               ├── RegisterTest.java
+
 │   │               └── SwipeTest.java
+
 │   │ └── resources/
+
 │   │     └── android.wdio.native.app.v1.0.8.apk
+
 └── testng.xml
+
 └── pom.xml 
+
 # Mobile Automation Final Practice
 
 Este proyecto es una práctica final de automatización móvil desarrollada con Java, Appium y TestNG, cuyo objetivo es consolidar todos los conocimientos aprendidos durante el curso de automatización móvil. Se centra en la automatización de pruebas funcionales para la aplicación de demostración **WebdriverIO Native Demo App**, disponible en Android.
