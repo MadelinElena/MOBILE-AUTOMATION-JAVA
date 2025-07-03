@@ -1,0 +1,10 @@
+mobile\test\BaseTest.class
+mobile\test\SwipeTest.class
+mobile\test\NavigationMenuTest.class
+mobile\pages\SwipePage.class
+mobile\test\LoginTest.class
+mobile\pages\BasePage.class
+mobile\pages\RegisterPage.class
+mobile\pages\MenuPage.class
+mobile\pages\LoginPage.class
+mobile\test\RegisterTest.class

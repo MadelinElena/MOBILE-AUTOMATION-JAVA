@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Mobile Automation Suite">
+    <test name="Appium Tests">
+        <classes>
+            <class name="mobile.test.LoginTest"/>
+            <class name="mobile.test.NavigationMenuTest"/>
+            <class name="mobile.test.RegisterTest"/>
+            <class name="mobile.test.SwipeTest"/>
+        </classes>
+    </test>
+</suite>
