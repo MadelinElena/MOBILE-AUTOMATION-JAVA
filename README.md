@@ -149,40 +149,74 @@ mvn clean test -Dtest=LoginTest
 
 Se han implementado los 4 escenarios requeridos, cumpliendo con todos los pasos solicitados en el documento original:
 
+
 1. Navegación en la barra de menú inferior
+   
 •	Se navega por todas las secciones (Home, WebView, Login, Forms, Swipe, Drag).
+
 •	Se verifica que cada sección se carga correctamente mediante aserciones básicas.
+
 •	Independiente y reutilizable.
 
-2. Registro exitoso (Sign Up)
+
+
+3. Registro exitoso (Sign Up)
+   
 •	Se navega desde Login hacia el formulario de registro.
+
 •	Se completa el registro usando datos definidos (puede mejorarse con emails aleatorios).
+
 •	Se valida el mensaje "You successfully signed up!".
+
 •	Confirmación con botón OK.
+
 •	Test independiente y reutilizable.
 
-3. Inicio de sesión exitoso (Login)
+
+
+4. Inicio de sesión exitoso (Login)
+   
 •	Se navega a la vista de Login.
+
 •	Se completan los campos email y contraseña.
+
 •	Se valida el mensaje "You are logged in!".
+
 •	Confirmación con botón OK.
 
-4. Swipe y scroll
+
+
+5. Swipe y scroll
+   
 •	Se accede a la sección Swipe desde el menú.
+
 •	Se hace swipe horizontal en el carrusel (derecha e izquierda).
+
 •	Se hace scroll vertical hasta encontrar el texto "You found me!!!".
+
 •	Se verifica su visibilidad.
 
+
 Cumplimiento de los requerimientos 
+
 •	Instalar la app en dispositivo/emulador	
+
 •	Automatizar 4 escenarios
+
 •	Mantener independencia entre los tests
+
 •	Uso de Page Object Model y PageFactory
+
 •	Uso de Appium con capacidades bien definidas
+
 •	Manejo de assertions para validar éxito de los flujos
+
 •	Configuración con Maven y ejecución vía TestNG
+
 •	testng.xml funcional
+
 •	Uso de buenas practicas.
+
 
 Madelin Alzate.
 Proyecto realizado como parte de la práctica final de automatización 
