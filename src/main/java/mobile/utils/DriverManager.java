@@ -11,7 +11,7 @@ import io.appium.java_client.android.AndroidDriver;
 public class DriverManager {
 
     public static AppiumDriver getDriver() {
-        DesiredCapabilities caps = CapabilitiesFactory.getCapabilities(); // Asegúrate que el método se llame así
+        DesiredCapabilities caps = CapabilitiesFactory.getCapabilities();
 
         try {
             return new AndroidDriver(new URL("http://localhost:4723/wd/hub"), caps);

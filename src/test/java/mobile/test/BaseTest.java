@@ -22,7 +22,7 @@ public class BaseTest {
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "Android");
-        caps.setCapability("platformVersion", "16"); // asegúrate que este valor coincida con el del emulador real
+        caps.setCapability("platformVersion", "16");
         caps.setCapability("deviceName", "Pixel_6");
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("app", app.getAbsolutePath());
