@@ -2,76 +2,83 @@ package mobile.pages;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.PageFactory;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
-public class SwipePage {
-
-    private AppiumDriver driver;
-
-    private By carousel = AppiumBy.accessibilityId("Carousel");
+public class SwipePage extends BasePage {
 
     public SwipePage(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
+
+    @AndroidFindBy(accessibility = "Carousel")
+    private WebElement carousel;
 
     public void swipeCarousel() {
-        WebElement carouselElement = driver.findElement(carousel);
-        int startX = carouselElement.getLocation().getX() + (int)(carouselElement.getSize().getWidth() * 0.8);
-        int endX = carouselElement.getLocation().getX() + (int)(carouselElement.getSize().getWidth() * 0.2);
-        int y = carouselElement.getLocation().getY() + (carouselElement.getSize().getHeight() / 2);
+        int centerY = carousel.getLocation().getY() + (carousel.getSize().getHeight() / 2);
+        int startX = (int) (carousel.getSize().getWidth() * 0.8);
+        int endX = (int) (carousel.getSize().getWidth() * 0.2);
 
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence swipe = new Sequence(finger, 1);
+        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, centerY));
+        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), endX, centerY));
+        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
-        // Swipe izquierda (→ ←)
-        for (int i = 0; i < 3; i++) {
-            Sequence swipeLeft = new Sequence(finger, 1);
-            swipeLeft.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, y));
-            swipeLeft.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipeLeft.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), endX, y));
-            swipeLeft.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Collections.singletonList(swipeLeft));
+        driver.perform(Collections.singletonList(swipe));
+        esperar(1);
+    }
+
+    public void swipeAllCarouselCards() {
+        int totalSwipes = 5;
+        for (int i = 0; i < totalSwipes; i++) {
+            swipeCarousel();
         }
     }
 
-    public void scrollToHiddenText() {
-        try {
-            WebElement scrollable = driver.findElement(AppiumBy.accessibilityId("Swipe-screen"));
-            int startX = scrollable.getLocation().getX() + (scrollable.getSize().getWidth() / 2);
-            int startY = scrollable.getLocation().getY() + (int)(scrollable.getSize().getHeight() * 0.8);
-            int endY = scrollable.getLocation().getY() + (int)(scrollable.getSize().getHeight() * 0.2);
-
-            PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-
-            boolean found = false;
-            int attempts = 0;
-
-            while (!found && attempts < 5) {
-                try {
-                    WebElement hiddenText = driver.findElement(By.xpath("//*[@text='You found me!!!']"));
-                    if (hiddenText.isDisplayed()) {
-                        found = true;
-                        break;
-                    }
-                } catch (Exception e) {
-                    // Scroll hacia arriba (para ver lo de abajo)
-                    Sequence swipe = new Sequence(finger, 1);
-                    swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
-                    swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-                    swipe.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), startX, endY));
-                    swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-                    driver.perform(Collections.singletonList(swipe));
-                    attempts++;
-                }
+    public void scrollDownUntilFound() {
+        int maxSwipes = 8;
+        for (int i = 0; i < maxSwipes; i++) {
+            if (isHiddenTextVisible()) {
+                esperar(2);
+                break;
             }
-        } catch (Exception e) {
-            throw new RuntimeException("No se pudo hacer scroll vertical en Swipe-screen", e);
+            swipeVerticallyFromScrollContainer();
+            esperar(1);
         }
+    }
+
+    public boolean isHiddenTextVisible() {
+        List<WebElement> elements = driver.findElements(By.xpath("//*[@text='You found me!!!']"));
+        return !elements.isEmpty() && elements.get(0).isDisplayed();
+    }
+
+    public void swipeVerticallyFromScrollContainer() {
+        WebElement scrollContainer = driver.findElement(By.xpath("//android.widget.ScrollView[@content-desc='Swipe-screen']/android.view.ViewGroup"));
+
+        int startX = scrollContainer.getLocation().getX() + (scrollContainer.getSize().getWidth() / 2);
+        int startY = scrollContainer.getLocation().getY() + (scrollContainer.getSize().getHeight() / 2);
+        int endY = startY - 1000; // hacia arriba
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence swipe = new Sequence(finger, 1);
+        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
+        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(800), PointerInput.Origin.viewport(), startX, endY));
+        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        driver.perform(Collections.singletonList(swipe));
+        esperar(1);
     }
 }

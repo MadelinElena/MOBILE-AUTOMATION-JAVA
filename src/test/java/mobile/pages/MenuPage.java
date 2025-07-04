@@ -43,4 +43,8 @@ public class MenuPage {
     public void goToDrag() {
         driver.findElement(dragTab).click();
     }
+
+    public void goToRegister() {
+        goToForms();
+    }
 }
