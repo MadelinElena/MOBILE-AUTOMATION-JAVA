@@ -9,13 +9,13 @@ public class CapabilitiesFactory {
 
         caps.setCapability("platformName", "Android");
         caps.setCapability("appium:automationName", "UiAutomator2");
-        caps.setCapability("appium:deviceName", "emulator-5554");
-        caps.setCapability("appium:platformVersion", "11.0");
+        caps.setCapability("appium:deviceName", "Pixel_6_2"); // o el nombre exacto si es distinto
+        caps.setCapability("appium:platformVersion", "14");
         caps.setCapability("appium:appPackage", "com.wdiodemoapp");
-        caps.setCapability("appium:appActivity", "com.wdiodemoapp.MainActivity");
-        caps.setCapability("appium:noReset", true);
-        caps.setCapability("appium:ensureWebviewsHavePages", true);
-        caps.setCapability("appium:app", "C:\\Users\\ASUS\\Downloads\\android.wdio.native.app.v1.0.8.apk");
+        caps.setCapability("appium:appActivity", ".MainActivity");
+        caps.setCapability("appium:noReset", "true");
+        caps.setCapability("appium:ensureWebviewsHavePages", "true");
+        caps.setCapability("appium:app", "C:\\Users\\ASUS\\Documents\\mobile-automation-java\\src\\test\\resources\\android.wdio.native.app.v1.0.8.apk");
 
         return caps;
     }

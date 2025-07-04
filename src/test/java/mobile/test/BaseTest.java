@@ -22,15 +22,15 @@ public class BaseTest {
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "Android");
-        caps.setCapability("platformVersion", "16");
-        caps.setCapability("deviceName", "Pixel_6");
+        caps.setCapability("platformVersion", "14");
+        caps.setCapability("deviceName", "Pixel_6_2");
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("app", app.getAbsolutePath());
         caps.setCapability("autoGrantPermissions", true);
         caps.setCapability("appWaitActivity", "*");
         caps.setCapability("newCommandTimeout", 240);
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), caps);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 

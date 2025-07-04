@@ -9,22 +9,25 @@ public class LoginPage {
 
     private AppiumDriver driver;
 
-    private By emailInput = AppiumBy.accessibilityId("input-email");
-    private By passwordInput = AppiumBy.accessibilityId("input-password");
+    // Elementos
+    private By emailField = AppiumBy.accessibilityId("input-email");
+    private By passwordField = AppiumBy.accessibilityId("input-password");
     private By loginButton = AppiumBy.accessibilityId("button-LOGIN");
-    private By successAlertMessage = AppiumBy.id("android:id/message");
-    private By alertOkButton = AppiumBy.id("android:id/button1");
+    private By alertMessage = AppiumBy.id("android:id/message");
+    private By okButton = AppiumBy.id("android:id/button1");
 
+    // Constructor
     public LoginPage(AppiumDriver driver) {
         this.driver = driver;
     }
 
+    // Métodos
     public void enterEmail(String email) {
-        driver.findElement(emailInput).sendKeys(email);
+        driver.findElement(emailField).sendKeys(email);
     }
 
     public void enterPassword(String password) {
-        driver.findElement(passwordInput).sendKeys(password);
+        driver.findElement(passwordField).sendKeys(password);
     }
 
     public void submitLogin() {
@@ -32,10 +35,10 @@ public class LoginPage {
     }
 
     public String getAlertMessage() {
-        return driver.findElement(successAlertMessage).getText();
+        return driver.findElement(alertMessage).getText();
     }
 
     public void confirmAlert() {
-        driver.findElement(alertOkButton).click();
+        driver.findElement(okButton).click();
     }
 }
